@@ -20,7 +20,13 @@ class Product(models.Model):
     name_prod = models.CharField(max_length=50, verbose_name="Продукт")
     descr = models.CharField(max_length=100, verbose_name="Описание")
     image = models.ImageField(upload_to='images/')
-    idd_cat = models.IntegerField(default=0, verbose_name="Категория_ID")
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name="products",
+        verbose_name="Категория",
+        help_text="Введите категорию продукта",
+    )
     cost = models.FloatField(default=0.0, verbose_name="Цена за покупку")
     date_created_at = models.DateField( verbose_name="Дата создания")
     date_updated_at = models.DateField( verbose_name="Дата изменения")
