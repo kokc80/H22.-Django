@@ -1,3 +1,35 @@
 from django.db import models
 
+
+class Category(models.Model):
+    idd_cat = models.IntegerField(verbose_name="Категория_ID")
+    name_cat = models.CharField(max_length=50, verbose_name="Категория")
+    descr = models.CharField(max_length=100, verbose_name="Описание")
+
+    def __str__(self):
+        return f'{self.name_cat}'
+
+    class Meta:
+        verbose_name = "Категория"
+        verbose_name_plural = "Категории"
+        ordering = ["name_cat"]
+
+
+class Product(models.Model):
+    idd_prod = models.IntegerField(verbose_name="Продукт_ID")
+    name_prod = models.CharField(max_length=50, verbose_name="Продукт")
+    descr = models.CharField(max_length=100, verbose_name="Описание")
+    image = models.ImageField(upload_to='images/')
+    idd_cat = models.IntegerField(default=0, verbose_name="Категория_ID")
+    cost = models.FloatField(default=0.0, verbose_name="Цена за покупку")
+    date_created_at = models.DateField( verbose_name="Дата создания")
+    date_updated_at = models.DateField( verbose_name="Дата изменения")
+
+    class Meta:
+        verbose_name = 'Продукт'
+        verbose_name_plural = 'Продукты'
+        ordering = ["name_prod"]
+
+
+
 # Create your models here.
